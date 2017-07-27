@@ -5,6 +5,7 @@
           注：为什么分割前要反转？因为结果长度不定，
               反转后，可以使输出结果前面位数在3位以内
 '''
+
 #  按间距为3分割字符串
 def my_split(str, width):
     return [str[x:x+width] for x in range(0,len(str),width)]
