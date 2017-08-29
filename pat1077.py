@@ -5,7 +5,6 @@
 		  3.若有一个不包含公共字符串，则输出nai
 '''
 
-
 N = int(input())
 sentences = []
 for i in range(N):
