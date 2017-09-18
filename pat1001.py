@@ -4,7 +4,7 @@
 
           注：为什么分割前要反转？因为结果长度不定，
               反转后，可以使输出结果前面位数在3位以内
-'''
+
 
 #  按间距为3分割字符串
 def my_split(str, width):
@@ -24,5 +24,9 @@ c = str(c)[::-1]
 c = ','.join(my_split(c,3))    #  分割后用‘，’连接
 print(sign + c[::-1])
 
+'''
 
+#   新增最好方法，直接用python的format
 
+a,b = (int(x) for x in input().split())
+print("{:,}".format(a+b))
