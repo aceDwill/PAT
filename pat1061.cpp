@@ -9,7 +9,7 @@ int main() {
 	cin >> s1 >> s2 >> s3 >> s4;
 	int len1 = s1.length();
 	int len2 = s3.length();
-	bool isWeek = true;	//	标志找到了星期几
+	bool isWeek = true;	// 标志找到了星期几
 	for (int i = 0; i < len1; i++) {
 		if (s1[i] == s2[i] && s1[i] >= 'A'&&s2[i] <= 'G'&&isWeek == true) {
 			cout << week[s1[i] - 'A'] << ' ';
