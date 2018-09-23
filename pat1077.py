@@ -1,37 +1,32 @@
-'''
-    测试点2未通过
-    思路： 1.先比较两个字符串，找出公共部分，若没有，则输出nai
-		  2.在以后每个字符串中找公共字符串，若每个都有则输出公共字符串
-		  3.若有一个不包含公共字符串，则输出nai
-'''
-
+"""
+     思路：1.将所有字符串反转，便于后续处理，并求出最短字符串长度
+          2.从0索引比较所有反转字符串相同索引各字符是否相等
+"""
 
 N = int(input())
 sentences = []
+minLen = 300  # 所有句子最短长度
 for i in range(N):
-    sentences.append(input())
+    sentence = input()[::-1]
+    if len(sentence) < minLen:
+        minLen = len(sentence)
+    sentences.append(sentence)
 
-sentence1 = sentences[0][::-1]
-sentence2 = sentences[1][::-1]
+common_cnt = 0  # 相同字符个数
 
-common_cnt = 0  #   相同字符个数
-for i in range(len(sentence1)):
-    if sentence1[i] != sentence2[i]:
+for i in range(minLen):
+    commonC = sentences[0][i]
+    hasSuffix = True  # 表示各索引的所有字符相同
+    for sentence in sentences:
+        if sentence[i] != commonC:
+            hasSuffix = False
+            break
+    if hasSuffix:
+        common_cnt += 1
+    else:
         break
-    common_cnt += 1
 
 if common_cnt == 0:
-    print('nai')
+    print("nai")
 else:
-    common_string = sentences[0][-common_cnt:].strip()
-    flag = True
-    for i in range(2,N):
-        if sentences[i].find(common_string) == -1:
-            flag = False
-            print('nai')
-            break
-
-    if flag == True:
-        print(common_string)
-
-
+    print(sentences[0][:common_cnt][::-1])
