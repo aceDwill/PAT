@@ -1,6 +1,6 @@
 /*
 	思路：先按规则总体排序，再根据具体查询输出
-	注：1，2测试点出现问题
+	注：由于每次查询人数不会超过100，可以将某个年龄资产在100以后的人舍去
 
 */
 
@@ -17,25 +17,9 @@ struct Rich{
 };
 
 vector<Rich> rich_men, rich_men_100;	//	所有的富豪和经过某个年龄拥有资产在前一百筛选的富豪
-int age_rich_num[300] = { 0 };		//	统计某个具体年龄的人数
+int age_rich_num[1000] = { 0 };		//	统计某个具体年龄的人数
 
-void print_result(int max_num, int amin, int amax) {
-	vector<Rich> search_rich_men;
-	for (int i = 0; i < rich_men_100.size(); i++) {
-		if (rich_men_100[i].age >= amin && rich_men_100[i].age <= amax) {
-			search_rich_men.push_back(rich_men[i]);
-		}
-	}
-	if (search_rich_men.size() == 0) {
-		cout << "None" << endl;
-	}
-	else {
-		for (int i = 0; i < search_rich_men.size() && i < max_num; i++) {
-			cout << search_rich_men[i].name << " "
-				<< search_rich_men[i].age << " " << search_rich_men[i].worth << endl;
-		}
-	}
-}
+
 
 bool comp(Rich r1, Rich r2) {
 	
@@ -67,7 +51,19 @@ int main() {
 	for (int i = 1; i <= K; i++) {
 		cin >> max_num >> amin >> amax;
 		cout << "Case #" << i << ":" << endl;
-		print_result(max_num, amin, amax);
+		int printNum = 0;
+		for (int j = 0; j < rich_men_100.size() && printNum < max_num; j++) {
+			Rich temp = rich_men_100[j];
+			if (temp.age >= amin && temp.age <= amax) {
+				cout << temp.name << " " << temp.age << " " << temp.worth << endl;
+			
+				printNum++;
+			}		
+		}
+
+		if (printNum == 0) {
+			cout << "None" << endl;
+		}
 	}
 
 
